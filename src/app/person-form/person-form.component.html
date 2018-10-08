@@ -18,6 +18,6 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button type="submit" form="personFormId">Save</button>
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button type="submit" form="personFormId" (click)="dialogRef.close(true)">Save</button>
+  <button mat-button mat-dialog-close (click)="dialogRef.close(false)">Cancel</button>
 </mat-dialog-actions>

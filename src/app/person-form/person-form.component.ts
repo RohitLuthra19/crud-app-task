@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, NgForm } from '@angular/forms';
 import { PersonService } from '../person.service';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-person-form',
@@ -16,7 +16,7 @@ export class PersonFormComponent implements OnInit {
   mobileNo = '';
   emailId = '';
 
-  constructor(private formBuilder: FormBuilder, private personService: PersonService, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private formBuilder: FormBuilder, private personService: PersonService, @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<PersonFormComponent>) { }
 
   ngOnInit() {
     this.personForm = this.formBuilder.group({
