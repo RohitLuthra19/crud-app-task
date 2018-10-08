@@ -19,11 +19,19 @@ export class PersonFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private personService: PersonService, @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<PersonFormComponent>) { }
 
   ngOnInit() {
-    this.personForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]],
-      emailId: ['', [Validators.required, Validators.email]],
-      mobileNo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[1-9][0-9]{9}$/)]]
-    });
+    if (this.data.operation == 'add') {
+      this.personForm = this.formBuilder.group({
+        name: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]],
+        emailId: ['', [Validators.required, Validators.email]],
+        mobileNo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[1-9][0-9]{9}$/)]]
+      });
+    } else {
+      this.personForm = this.formBuilder.group({
+        name: [this.data.personData.name, [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]],
+        emailId: [this.data.personData.emailId, [Validators.required, Validators.email]],
+        mobileNo: [this.data.personData.mobileNo, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[1-9][0-9]{9}$/)]]
+      });
+    }
   }
 
   // convenience getter for easy access to form fields
@@ -50,7 +58,7 @@ export class PersonFormComponent implements OnInit {
             console.log(err);
           });
       } else if (data.operation == 'update') {
-        this.personService.updatePersons(data.id, form)
+        this.personService.updatePersons(data.personData._id, form)
           .subscribe(res => {
             alert('Person updated successfully');
           }, (err) => {

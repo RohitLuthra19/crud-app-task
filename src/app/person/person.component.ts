@@ -39,9 +39,9 @@ export class PersonComponent implements OnInit {
 
 
 
-  openUpdateDialog(id) {
+  openUpdateDialog(person) {
     this.personAddUpdateDialogRef = this.dialog.open(PersonFormComponent, {
-      data: { operation: 'update', id: id },
+      data: { operation: 'update', personData: person },
     });
 
     this.personAddUpdateDialogRef.afterClosed().subscribe(result => {
