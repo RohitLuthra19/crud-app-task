@@ -1,0 +1,19 @@
+<div>
+  <button mat-button (click)="openSaveDialog()">Add</button>
+  <table id="persons">
+    <tr>
+      <th>Name</th>
+      <th>Mobile No</th>
+      <th>Email Id</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr *ngFor='let person of persons'>
+      <td>{{ person.name }}</td>
+      <td>{{ person.mobileNo }}</td>
+      <td>{{ person.emailId }}</td>
+      <td><i class="fa fa-edit" (click)="openUpdateDialog(person._id)"></i></td>
+      <td><i class="fa fa-trash" (click)="openDeleteDialog(person._id)"></i></td>
+    </tr>
+  </table>
+</div>

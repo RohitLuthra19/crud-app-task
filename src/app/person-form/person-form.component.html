@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{data.operation | titlecase}} person</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="personForm" id="personFormId" (ngSubmit)="onFormSubmit(personForm.value, data)" class="form-container">
+    <mat-form-field>
+      <input matInput placeholder="Name" [formControl]="formField.name" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Mobile No" #input maxlength="10" [formControl]="formField.mobileNo" required>
+      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Email Id" [formControl]="formField.emailId" required>
+      <mat-error *ngIf="formField.emailId.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="submit" form="personFormId">Save</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
